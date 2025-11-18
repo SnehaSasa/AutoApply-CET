@@ -43,6 +43,7 @@ It reads any job application page, understands field labels using machine learni
 
 ## 📁 Project Structure
 
+```text
 autoApplyChromeextension/
 ├── backend/
 │   ├── app/
@@ -99,7 +100,7 @@ autoApplyChromeextension/
 ├── .env
 ├── .gitignore
 └── readme.md
-
+```
 ---
 
 
