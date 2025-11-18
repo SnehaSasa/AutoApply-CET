@@ -45,65 +45,6 @@ It reads any job application page, understands field labels using machine learni
 
 autoApplyChromeextension/
 ├── backend/
-│ ├── app/
-│ │ ├── embeddings.py
-│ │ ├── main.py
-│ │ └── vector_store.py
-│ ├── myvenv/
-│ ├── scripts/
-│ │ └── embed_init.py
-│ ├── readme.md
-│ └── requirements.txt
-├── docs/
-│ └── architecture.md
-├── extension/
-│ ├── dist/
-│ │ ├── index.html
-│ │ └── assets/
-│ │ └── main-Bi0hC8od.js
-│ ├── node-modules/
-│ ├── src/
-│ │ ├── ai/
-│ │ │ └── semanticClient.js
-│ │ ├── autofill/
-│ │ │ ├── autofillEngine.js
-│ │ │ └── typingSimulator.js
-│ │ ├── popup/
-│ │ │ ├── App.jsx
-│ │ │ ├── index.html
-│ │ │ └── main.jsx
-│ │ ├── storage/
-│ │ │ └── storage.js
-│ │ ├── ui/
-│ │ ├── utils/
-│ │ │ └── domHelpers.js
-│ ├── background.js
-│ ├── contentScript.js
-│ ├── icon16.png
-│ ├── icon48.png
-│ ├── icon128.png
-│ ├── manifest.json
-│ ├── package-lock.json
-│ ├── package.json
-│ ├── sample_form.html
-│ ├── tailwind.config.cjs
-│ └── vite.config.mjs
-├── tests/
-│ ├── demo_pages/
-│ │ └── sample_form.html
-│ ├── selenium/
-│ │ └── test_form_fill.py
-│ └── sample_form.html
-├── tools/
-│ └── helper_scripts.sh
-├── .env
-├── .gitignore
-└── readme.md
-
-
-
-autoApplyChromeextension/
-├── backend/
 │   ├── app/
 │   │   ├── embeddings.py
 │   │   ├── main.py
