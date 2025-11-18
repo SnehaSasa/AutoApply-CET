@@ -1,0 +1,13 @@
+{
+  "0": "first_name",
+  "1": "last_name",
+  "2": "full_name",
+  "3": "email",
+  "4": "phone",
+  "5": "city",
+  "6": "country",
+  "7": "postal_code",
+  "8": "address_line_1",
+  "9": "address_line_2",
+  "10": "address_line_3"
+}
