@@ -1,0 +1,41 @@
+
+{
+  "manifest_version": 3,
+  "name": "AutoApply",
+  "version": "0.1",
+  "description": "Auto job application tool",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["http://127.0.0.1/*", "http://localhost/*"],
+  "action": {
+    "default_popup": "dist/index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src http://127.0.0.1:* http://localhost:*;"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  
+  "host_permissions": ["<all_urls>"],
+  "optional_permissions": ["fileSystem"],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["preview.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+
+
+}
