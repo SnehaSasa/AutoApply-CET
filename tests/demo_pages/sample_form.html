@@ -1,0 +1,691 @@
+<!-- <!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sample Job Form</title>
+    <style>
+      body { font-family: Arial; padding: 24px; }
+      label { display:block; margin-top: 12px; }
+      input, textarea, select { width: 100%; padding: 8px; margin-top: 6px; }
+      .submit { margin-top: 16px; padding: 10px 14px; }
+    </style>
+  </head>
+  <body>
+    <h2>Sample Job Application</h2>
+    <form id="sampleForm">
+      <label>Given name<input name="givenName" placeholder="Given name"/></label>
+      <label>Family name<input name="familyName" placeholder="Family name"/></label>
+      <label>Mother's name<input name="mothersName" placeholder="Mothers name"/></label>
+      <label>age<input name="age" placeholder="Age"/></label>
+      <label>new field<input name="fieldd" placeholder="Fieldd"/></label>
+      <label>Place of residence<input name="residence" placeholder="Place of residence"/></label>
+      <label>Email address<input name="email" placeholder="Email"/></label>
+      <label>Graduation year<input name="gradYear" placeholder="Graduation year"/></label>
+      <label>Upload resume<input type="file" name="resumeUpload" /></label>
+      <label>Are you willing to relocate?
+        <select name="relocate">
+          <option value="">--select--</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <label>Agree to terms
+        <input type="checkbox" name="agree" />
+      </label>
+      <button class="submit" type="submit">Submit</button>
+    </form>
+  </body>
+</html> -->
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Acme Corp — Job Application (Demo)</title>
+  <style>
+    :root{
+      --accent:#2563eb; --muted:#666; --bg:#f6f8fb; --card:#fff;
+    }
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg); margin:0; padding:0;
+    }
+
+
+
+    .container{
+      width:100%;
+      min-height:100vh;
+      background:var(--card);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      margin:0;
+      padding:40px;
+      box-sizing:border-box;
+    }
+    .card{
+      width:100%;
+      max-width:none;
+      background:transparent;
+      padding:0;
+      border-radius:0;
+      box-shadow:none;
+      box-sizing:border-box;
+    }
+
+
+
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+    .logo{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    h1{margin:0;font-size:20px}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:14px}
+
+    .steps{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:18px 0 0;
+      justify-content:space-between;
+    }
+    .step{
+      flex:1;
+      min-width:150px;
+      padding:12px;
+      border-radius:8px;
+      text-align:center;
+      font-size:13px;
+      background:#eef3ff;
+      color:#123;
+      opacity:.8;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .step:hover{opacity:1;transform:scale(1.02)}
+    .step.active{background:var(--accent); color:#fff; opacity:1}
+
+    .form-step{display:none;margin-top:18px}
+    .form-step.active{display:block}
+
+    .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .col{
+      flex:1;
+      min-width:260px;
+      box-sizing:border-box;
+    }
+    label{display:block;font-size:13px;margin-bottom:6px;color:#1f2937}
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea, input[type="date"]{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #e6e9ef;
+      background:#fff;
+      font-size:14px;
+      box-sizing:border-box;
+    }
+    textarea{min-height:100px;resize:vertical}
+    .small{font-size:13px;color:var(--muted)}
+    .controls{display:flex;gap:10px;justify-content:space-between;margin-top:18px;flex-wrap:wrap}
+    button{padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;white-space:nowrap}
+    button.secondary{background:#eef2ff;color:var(--accent); border:1px solid rgba(37,99,235,0.08)}
+    .tagBox{display:flex;flex-wrap:wrap;gap:8px;padding:10px;border-radius:8px;border:1px dashed #e2e8f0;background:#fff}
+    .tag{background:#eef2ff;color:var(--accent);padding:6px 8px;border-radius:999px;display:inline-flex;gap:8px;align-items:center}
+    .tag button{background:transparent;border:0;color:var(--accent);cursor:pointer;font-weight:700}
+    .meta{font-size:13px;color:var(--muted);margin-top:6px}
+
+    .resume-area{display:flex;align-items:center;gap:12px}
+    .resume-name{font-size:14px;color:#0f172a}
+
+    .summary{background:#0f172a;color:#fff;padding:12px;border-radius:8px}
+    .kbd{background:#111827;color:#fff;padding:2px 6px;border-radius:6px;font-size:12px}
+
+    .toast{position:fixed;right:20px;bottom:20px;background:#16a34a;color:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 6px 18px rgba(16,185,129,0.12)}
+    .note{font-size:13px;color:#374151}
+    .muted{color:var(--muted)}
+
+    /* Make Step 2 (Personal Info) single column */
+    [data-step="2"] .row {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    [data-step="2"] .col {
+      width: 100%;
+    }
+
+    [data-step="2"] label {
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    [data-step="2"] input, 
+    [data-step="2"] select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+
+
+    @media (max-width:640px){
+      .row{flex-direction:column}
+      .step{min-width:100px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <div class="logo">AC</div>
+        <div>
+          <h1>Acme Corp — Apply for: <span id="jobTitle">Senior Data Scientist</span></h1>
+          <p class="lead" id="companyLine">Acme Corp • Bengaluru • Full-time</p>
+        </div>
+        <!-- <div style="margin-left:auto;text-align:right">
+          <button id="seedKbBtn" class="secondary" style="margin-right:8px">Start Autofill (seed KB)</button>
+          <button id="autofillBtn" class="secondary">Auto-fill from KB</button>
+        </div> -->
+      </header>
+
+      <div class="steps">
+        <div class="step active" data-step="1">1 — Job</div>
+        <div class="step" data-step="2">2 — Personal</div>
+        <div class="step" data-step="3">3 — Education & Work</div>
+        <div class="step" data-step="4">4 — Skills</div>
+        <div class="step" data-step="5">5 — Resume & Submit</div>
+      </div>
+
+      <!-- FORM PAGES (unchanged content) -->
+      <!-- Keep your existing form-step sections here -->
+      <!-- ↓↓↓ Paste all existing <section class="form-step" ...> blocks exactly as before ↓↓↓ -->
+      <!-- All 5 form-step sections remain identical from your previous version -->
+      <!-- I’ve removed them here for brevity, but include them exactly as they were -->
+
+      <!-- ... paste your form sections here ... -->
+
+      <!-- PAGE: Job / Description -->
+      <section class="form-step active" data-step="1">
+        <h3>Job description</h3>
+        <p class="muted">
+          <strong id="companyName">Acme Corporation</strong> is hiring a <span id="jobRole">Senior Data Scientist</span>. We work on large scale ML systems for enterprise customers.
+        </p>
+        <div style="margin-top:12px">
+          <label>Job responsibilities</label>
+          <textarea id="jobResponsibilities" readonly>
+- Build and deploy ML models in production
+- Design experiments and evaluate metrics
+- Mentor junior engineers and collaborate with product
+          </textarea>
+        </div>
+
+        <div style="margin-top:12px">
+          <label>About the role / What you'll do</label>
+          <textarea id="jobAbout" readonly>
+You will own end-to-end ML pipelines, collaborate on data collection, and ship models that impact revenue and customer retention.
+          </textarea>
+        </div>
+
+        <div class="controls">
+          <div class="meta">Page 1 of 5</div>
+          <div>
+            <button class="secondary" id="toStep2">Next → Personal</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: Personal -->
+      <section class="form-step" data-step="2">
+        <h3>Personal information</h3>
+
+        <div class="row">
+          <div class="col">
+            <label for="full_name">Full name</label>
+            <input id="full_name" name="full_name" placeholder="Full name" type="text" />
+          </div>
+          <div class="col">
+            <label for="first_name">Given / First name</label>
+            <input id="first_name" name="first_name" placeholder="First name" type="text" />
+          </div>
+          <div class="col">
+            <label for="family_name">Family / Surname</label>
+            <input id="family_name" name="family_name" placeholder="Last name" type="text" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="father_name">Father's name</label>
+            <input id="father_name" name="father_name" placeholder="Father's name" type="text" />
+          </div>
+          <div class="col">
+            <label for="dob">Date of birth</label>
+            <input id="dob" name="dob" type="date" />
+            <div class="meta">Age: <span id="ageDisplay">—</span></div>
+          </div>
+          <div class="col">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+              <option value="">Select</option>
+              <option>Female</option><option>Male</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- <div class="col">
+            <label>Contact type</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <label><input type="radio" name="contact_type" value="mobile" checked/> Mobile</label>
+              <label><input type="radio" name="contact_type" value="telephone" /> Telephone</label>
+            </div>
+          </div> -->
+
+
+          <div class="col">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" placeholder="99999xxxxx" type="tel" />
+          </div>
+
+          <div class="row" style="flex-direction:column">
+            <div class="col">
+              <label for="address1">Address Line 1</label>
+              <input id="address1" name="address1" placeholder="House / Flat No., Street" type="text" />
+            </div>
+            <div class="col">
+              <label for="address2">Address Line 2</label>
+              <input id="address2" name="address2" placeholder="Area / Locality" type="text" />
+            </div>
+            <div class="col">
+              <label for="address3">Address Line 3</label>
+              <input id="address3" name="address3" placeholder="City / District / State" type="text" />
+            </div>
+            <div class="col">
+              <label for="country">Country</label>
+              <input id="country" name="country" placeholdeR="USA" type="text" />
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+        <div class="controls">
+          <div><button class="secondary" id="backTo1">← Back</button></div>
+          <div>
+            <button class="secondary" id="toStep3">Next → Education</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: Education & Work -->
+      <section class="form-step" data-step="3">
+        <h3>Education & Work Experience</h3>
+
+        <div class="row">
+          <div class="col">
+            <label for="college">College / University</label>
+            <input id="college" name="college" placeholder="e.g. XYZ Institute of Technology" type="text" />
+          </div>
+          <div class="col">
+            <label for="degree">Degree</label>
+            <input id="degree" name="degree" placeholder="e.g. B.Tech Computer Science" type="text" />
+          </div>
+          <div class="col">
+            <label for="passout_year">Passout year</label>
+            <select id="passout_year" name="passout_year">
+              <option value="">Select</option>
+              <!-- populate with JS -->
+            </select>
+          </div>
+        </div>
+
+        <hr style="margin:14px 0"/>
+
+        <h4>Work experience (full-time only)</h4>
+        <div class="small note">Work experience here means **full-time** paid employment — internships go in the internship section below.</div>
+
+        <div class="row">
+          <div class="col">
+            <label for="exp_years">Years of full-time experience</label>
+            <select id="exp_years" name="exp_years">
+              <option value="">0 (Fresher)</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="current_company">Current / Last company (if any)</label>
+            <input id="current_company" name="current_company" placeholder="Company name" type="text" />
+          </div>
+          <div class="col">
+            <label for="current_role">Designation</label>
+            <input id="current_role" name="current_role" placeholder="e.g. Data Scientist" type="text" />
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label for="exp_summary">Full-time experience summary (key responsibilities)</label>
+          <textarea id="exp_summary" name="exp_summary" placeholder="Describe your responsibilities in previous full-time roles"></textarea>
+        </div>
+
+        <hr style="margin:14px 0"/>
+
+        <h4>Internships</h4>
+        <div class="row">
+          <div class="col">
+            <label for="intern_company">Intern company</label>
+            <input id="intern_company" name="intern_company" placeholder="Internship company" type="text" />
+          </div>
+          <div class="col">
+            <label for="intern_designation">Designation</label>
+            <input id="intern_designation" name="intern_designation" placeholder="Intern designation" type="text" />
+          </div>
+          <div class="col">
+            <label for="intern_duration">Duration (months)</label>
+            <input id="intern_duration" name="intern_duration" placeholder="e.g. 3" type="number" />
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label for="intern_resp">Internship responsibilities / tasks</label>
+          <textarea id="intern_resp" name="intern_resp"></textarea>
+        </div>
+
+        <div class="controls">
+          <div><button class="secondary" id="backTo2">← Back</button></div>
+          <div><button class="secondary" id="toStep4">Next → Skills</button></div>
+        </div>
+      </section>
+
+      <!-- PAGE: Skills -->
+      <section class="form-step" data-step="4">
+        <h3>Skills</h3>
+        <div class="row">
+          <div class="col">
+            <label for="skillInput">Add a skill</label>
+            <div style="display:flex;gap:8px">
+              <input id="skillInput" placeholder="Type a skill and press Enter (e.g. Python)" />
+              <button id="addSkillBtn" class="secondary">Add</button>
+            </div>
+            <div class="meta">You can remove skills by clicking the × on a tag</div>
+          </div>
+          <div class="col">
+            <label>Common skill suggestions</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="secondary suggestion">Python</button>
+              <button class="secondary suggestion">Machine Learning</button>
+              <button class="secondary suggestion">NLP</button>
+              <button class="secondary suggestion">Deep Learning</button>
+              <button class="secondary suggestion">SQL</button>
+            </div>
+            <div style="margin-top:8px" class="meta">You can also load skills from stored KB.</div>
+            <div style="margin-top:8px">
+              <button id="loadSkillsKb" class="secondary">Load skills from KB</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="tagBox" id="skillsBox" aria-live="polite" aria-label="skills">
+            <!-- skill tags appear here -->
+          </div>
+        </div>
+
+        <div class="controls">
+          <div><button class="secondary" id="backTo3">← Back</button></div>
+          <div><button class="secondary" id="toStep5">Next → Resume</button></div>
+        </div>
+      </section>
+
+      <!-- PAGE: Resume & Submit -->
+      <section class="form-step" data-step="5">
+        <h3>Resume & Submit</h3>
+
+        <div class="row">
+          <div class="col">
+            <label for="resumeUpload">Upload resume</label>
+            <input id="resumeUpload" type="file" accept=".pdf,.doc,.docx" />
+            <div class="meta">You can upload multiple resumes via the extension popup or backend tool and the extension will auto-pick the right one</div>
+          </div>
+          <div class="col">
+            <label for="coverLetter">Optional: Cover letter / additional info</label>
+            <textarea id="coverLetter"></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label>Preview / Summary</label>
+          <div class="summary" id="previewSummary">No preview yet. Click Submit to see collected data.</div>
+        </div>
+
+        <div class="controls" style="margin-top:14px">
+          <div><button class="secondary" id="backTo4">← Back</button></div>
+          <div><button id="submitBtn">Submit application</button></div>
+        </div>
+      </section>
+
+
+
+    </div>
+  </div>
+
+  <script>
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const formSteps = Array.from(document.querySelectorAll('.form-step'));
+    function showStep(n){
+      steps.forEach(s=>s.classList.toggle('active', Number(s.dataset.step)===n));
+      formSteps.forEach(fs=>fs.classList.toggle('active', Number(fs.dataset.step)===n));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ✅ Click on step titles to jump directly
+    steps.forEach(s=>{
+      s.addEventListener('click', ()=>{
+        const stepNum = Number(s.dataset.step);
+        showStep(stepNum);
+      });
+    });
+
+    // existing logic below remains same
+    (function fillYears(){
+      const sel = document.getElementById('passout_year');
+      const now = new Date().getFullYear();
+      for(let y=now; y>=1990; y--){ const o=document.createElement('option'); o.value=y; o.text=y; sel.appendChild(o);}
+    })();
+
+    // Age calc on DOB change
+    document.getElementById('dob').addEventListener('change', () => {
+      const dob = new Date(document.getElementById('dob').value);
+      if (isNaN(dob)) { document.getElementById('ageDisplay').innerText='—'; return; }
+      const diff = Date.now() - dob.getTime();
+      const age = Math.floor(new Date(diff).getUTCFullYear() - 1970);
+      document.getElementById('ageDisplay').innerText = age;
+    });
+
+    // Navigation
+    document.getElementById('toStep2').addEventListener('click', ()=>showStep(2));
+    document.getElementById('backTo1').addEventListener('click', ()=>showStep(1));
+    document.getElementById('toStep3').addEventListener('click', ()=>showStep(3));
+    document.getElementById('backTo2').addEventListener('click', ()=>showStep(2));
+    document.getElementById('toStep4').addEventListener('click', ()=>showStep(4));
+    document.getElementById('backTo3').addEventListener('click', ()=>showStep(3));
+    document.getElementById('toStep5').addEventListener('click', ()=>showStep(5));
+    document.getElementById('backTo4').addEventListener('click', ()=>showStep(4));
+
+    // Quick hooks for buttons
+    document.querySelectorAll('.suggestion').forEach(btn=>{
+      btn.addEventListener('click', ()=>addSkill(btn.innerText));
+    });
+
+    // ---------- Skills tag management ----------
+    const skillsBox = document.getElementById('skillsBox');
+    function renderSkills(arr){
+      skillsBox.innerHTML='';
+      (arr||[]).forEach((s,i)=>{
+        const t = document.createElement('div'); t.className='tag'; t.innerHTML = `${s} <button data-i="${i}">×</button>`;
+        skillsBox.appendChild(t);
+      });
+      // wire delete handlers
+      skillsBox.querySelectorAll('button').forEach(b=>{
+        b.addEventListener('click', (e)=>{
+          const idx = Number(e.target.dataset.i);
+          skills.splice(idx,1);
+          renderSkills(skills);
+        });
+      });
+    }
+    let skills = [];
+    function addSkill(text){
+      text = (text||document.getElementById('skillInput').value||'').trim();
+      if(!text) return;
+      if(!skills.includes(text)){ skills.push(text); renderSkills(skills); }
+      document.getElementById('skillInput').value='';
+    }
+    document.getElementById('addSkillBtn').addEventListener('click', ()=>addSkill());
+    document.getElementById('skillInput').addEventListener('keydown', (e)=> { if(e.key==='Enter'){ e.preventDefault(); addSkill(); } });
+
+    // load skills from KB (localStorage for demo)
+    document.getElementById('loadSkillsKb').addEventListener('click', ()=>{
+      const kb = JSON.parse(localStorage.getItem('knowledgeBase')||'{}');
+      const kskills = kb.skills || ['Python','SQL','Machine Learning'];
+      kskills.forEach(s=>{ if(!skills.includes(s)) skills.push(s); });
+      renderSkills(skills);
+      showToast('Loaded skills from KB');
+    });
+
+    // ---------- Autofill demo helpers ----------
+    function seedSampleKB(){
+      const kb = {
+        first_name: "Sneha",
+        family_name: "A",
+        full_name: "Sneha A",
+        father_name: "Rajesh",
+        dob: "2003-03-15",
+        postal_code: "560001",
+        phone: "9999900000",
+        college: "ABC Institute of Technology",
+        degree: "B.Tech Computer Science",
+        passout_year: "2024",
+        skills: ["Python","Machine Learning","NLP"],
+        resumes: {
+          "Resume_DS.pdf": { url: "http://127.0.0.1:8000/resumes/Resume_DS.pdf", keywords:["Data Science","ML"] }
+        }
+      };
+      localStorage.setItem('knowledgeBase', JSON.stringify(kb));
+      showToast('Sample KB seeded (localStorage)');
+    }
+    document.getElementById('seedKbBtn').addEventListener('click', seedSampleKB);
+
+    // autofill from KB (reads from localStorage for demo)
+    document.getElementById('autofillBtn').addEventListener('click', async ()=>{
+      const kb = JSON.parse(localStorage.getItem('knowledgeBase')||'{}');
+      if(!kb) { showToast('No KB found'); return; }
+      // personal
+      if(kb.full_name) document.getElementById('full_name').value = kb.full_name;
+      if(kb.first_name) document.getElementById('first_name').value = kb.first_name;
+      // if(kb.last_name) document.getElementById('family_name').value = kb.last_name;
+      if(kb.family_name) document.getElementById('family_name').value = kb.family_name;
+      if(kb.father_name) document.getElementById('father_name').value = kb.father_name;
+      if(kb.dob) { document.getElementById('dob').value = kb.dob; document.getElementById('dob').dispatchEvent(new Event('change')); }
+      if(kb.pin_code) document.getElementById('postal_code').value = kb.pin_code;
+      if(kb.phone) document.getElementById('phone').value = kb.phone;
+
+      // education
+      if(kb.college) document.getElementById('college').value = kb.college;
+      if(kb.degree) document.getElementById('degree').value = kb.degree;
+      if(kb.passout_year) document.getElementById('passout_year').value = kb.passout_year;
+
+      // skills
+      if(kb.skills) { skills = Array.from(new Set([...(skills||[]), ...kb.skills])); renderSkills(skills); }
+
+      showToast('Auto-filled from KB (localStorage). You can refine or continue.');
+    });
+
+    // ---------- Resume handling preview ----------
+    function attachSelectedResumeToPreview(file){
+      const name = file.name || 'resume.pdf';
+      const sizeKb = Math.round((file.size||0)/1024);
+      document.getElementById('previewSummary').innerHTML = `
+        <strong>${document.getElementById('full_name').value || 'Applicant'}</strong> — applying for <em>${document.getElementById('jobTitle').innerText}</em>
+        <div style="margin-top:8px">
+          <div class="resume-area"><div class="resume-name">${name}</div> <div class="meta">(${sizeKb} KB)</div></div>
+        </div>
+      `;
+    }
+    document.getElementById('resumeUpload').addEventListener('change', (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if(f) attachSelectedResumeToPreview(f);
+    });
+
+    // ---------- Submit ----------
+    document.getElementById('submitBtn').addEventListener('click', (e)=>{
+      // gather values
+      const out = {
+        personal: {
+          full_name: document.getElementById('full_name').value,
+          first_name: document.getElementById('first_name').value,
+          family_name: document.getElementById('family_name').value,
+          father_name: document.getElementById('father_name').value,
+          dob: document.getElementById('dob').value,
+          age: document.getElementById('ageDisplay').innerText,
+          postal_code: document.getElementById('postal_code').value,
+          phone: document.getElementById('phone').value,
+          address1: document.getElementById('address1').value,
+          address2: document.getElementById('address2').value,
+          address3: document.getElementById('address3').value
+        },
+
+        education: {
+          college: document.getElementById('college').value,
+          degree: document.getElementById('degree').value,
+          passout_year: document.getElementById('passout_year').value,
+          exp_years: document.getElementById('exp_years').value,
+          exp_summary: document.getElementById('exp_summary').value
+        },
+        internship: {
+          company: document.getElementById('intern_company').value,
+          designation: document.getElementById('intern_designation').value,
+          duration_months: document.getElementById('intern_duration').value,
+          responsibilities: document.getElementById('intern_resp').value
+        },
+        skills: skills,
+        resume: document.getElementById('resumeUpload').files && document.getElementById('resumeUpload').files[0] ? document.getElementById('resumeUpload').files[0].name : null,
+        cover: document.getElementById('coverLetter').value
+      };
+      // display JSON summary
+      document.getElementById('previewSummary').innerHTML = `<pre style="white-space:pre-wrap">${JSON.stringify(out,null,2)}</pre>`;
+      showToast('Application prepared (preview shown). You can copy or send it to backend.');
+      // in a real flow, send to backend here via fetch
+    });
+
+    // small toast helper
+    function showToast(msg){
+      const t = document.createElement('div'); t.className='toast'; t.innerText=msg; document.body.appendChild(t);
+      setTimeout(()=>t.remove(),2400);
+    }
+
+    // initial render
+    renderSkills(skills);
+  </script>
+</body>
+</html>
