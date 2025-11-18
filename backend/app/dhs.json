@@ -1,0 +1,15 @@
+"resumes": {
+        "description": (
+            "Dictionary of available resumes, each containing keywords and a URL to the file. "
+            "Before uploading, analyze the job description to select the most relevant resume "
+            "based on the keyword match."
+        ),
+        "rule": (
+            "If job description contains keywords ['Data Scientist','Senior Data Scientist', 'AI Engineer', 'ML Engineer', 'Artificial Intelligence Engineer','Machine Learning Engineer','Deep Learning Engineer','Generative AI Engineer','Gen AI Engineer'], "
+            "upload 'Resume_DS.pdf from the url given'. Otherwise, use 'Resume_Sneha.pdf'."
+        ),
+        "subfields": {
+            "keywords": "List of keywords describing which roles the resume is tailored for.",
+            "url": "URL path to the resume file to be uploaded."
+        },
+        "aliases": ["resume", "cv", "curriculum vitae", "resume upload", "upload cv"]}
