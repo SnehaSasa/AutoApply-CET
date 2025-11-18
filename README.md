@@ -106,7 +106,7 @@ autoApplyChromeextension/
 
 ## ⚙️ Installation & Setup Guide
 
-### **Create a virtual environment inside backend and install all the requirements
+### **Create a virtual environment inside backend and install all the requirements**
 
 cd backend
 python -m venv myvenv
